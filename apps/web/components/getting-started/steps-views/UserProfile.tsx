@@ -109,7 +109,7 @@ const UserProfile = (props: IUserProfile) => {
   ];
 
   const DEFAULT_WEBHOOK = {
-    subscriberUrl: "http://localhost:3000",
+    subscriberUrl: "https://app.pesto.tech/api/1.1/wf/webhook_interview",
     eventTriggers: [...WEBHOOK_TRIGGER_EVENTS_GROUPED_BY_APP["core"]],
     active: true,
     payloadTemplate: null,
