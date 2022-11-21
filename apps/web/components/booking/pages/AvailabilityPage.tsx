@@ -47,6 +47,7 @@ import type { AvailabilityPageProps } from "../../../pages/[user]/[type]";
 import type { DynamicAvailabilityPageProps } from "../../../pages/d/[link]/[slug]";
 import type { AvailabilityTeamPageProps } from "../../../pages/team/[slug]/[type]";
 
+let isTimeSet = false;
 // Get router variables
 const GoBackToPreviousPage = ({ t }: { t: TFunction }) => {
   const router = useRouter();
@@ -292,6 +293,19 @@ const AvailabilityPage = ({ profile, eventType, ...restProps }: Props) => {
 
   const [timeZone, setTimeZone] = useState<string>();
   const [timeFormat, setTimeFormat] = useState<TimeFormat>(detectBrowserTimeFormat);
+
+  if (!isTimeSet) {
+    const existingQueryParams = router.asPath.split("?")[1];
+
+    const urlParams = new URLSearchParams(existingQueryParams);
+    const entries = Object.fromEntries(urlParams);
+    if (entries && entries.timeZone) {
+      setTimeout(() => {
+        setTimeZone(entries.timeZone);
+      }, 200);
+    }
+    isTimeSet = true;
+  }
 
   const onTimeFormatChange = (is24Hours: boolean) => {
     setTimeFormat(is24Hours ? TimeFormat.TWENTY_FOUR_HOUR : TimeFormat.TWELVE_HOUR);
