@@ -59,7 +59,8 @@ const ConnectedCalendars = (props: IConnectCalendarsProps) => {
         <List className="mx-1 divide-y divide-gray-200 rounded-md border border-gray-200 bg-white p-0 dark:bg-black sm:mx-0">
           {queryIntegrations.data &&
             queryIntegrations.data.items
-              .filter((item) => item.type === "google_calendar" || item.type === "office365_calendar")
+              // .filter((item) => item.type === "google_calendar" || item.type === "office365_calendar")
+              .filter((item) => item.type === "google_calendar")
               .map((item) => (
                 <li key={item.title}>
                   {item.title && item.imageSrc && (
